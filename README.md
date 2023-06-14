@@ -11,7 +11,7 @@ The `config.yml` file is a YAML file with the following structure:
 ```yaml
 credentials:
   username: Domain\username
-  password: SuperS3cr3t
+  password: Su#perS3cr3t!&
 
 http_proxy_url: "http://proxy.url:port"
 https_proxy_url: "https://proxy.url:port"

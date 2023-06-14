@@ -1,8 +1,8 @@
 package main
 
 import (
-	"feynman/configuration"
 	"feynman/files"
+	"feynman/utils"
 	"flag"
 	"log"
 )
@@ -22,11 +22,11 @@ func main() {
 	}
 
 	// Load config file from the config.yml path
-	config, err := configuration.LoadConfig(*configFilePath)
+	config, err := utils.LoadConfig(*configFilePath)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	log.Println("Username:", config.Credentials.Username)
+	log.Println("URL encoded credentials:", utils.CredentialsToURLString(config))
 
 }
