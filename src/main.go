@@ -27,6 +27,12 @@ func main() {
 		log.Fatal(err)
 	}
 
-	log.Println("URL encoded credentials:", utils.CredentialsToURLString(config))
+	// insert the credentials into the proxy URLs
+	http_proxy, https_proxy, err := utils.InsertCredentialsIntoProxyURLs(config)
+	if err != nil {
+		log.Fatal(err)
+	}
 
+	log.Println("Using as HTTP proxy:", http_proxy)
+	log.Println("Using as HTTPS proxy:", https_proxy)
 }

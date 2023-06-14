@@ -11,10 +11,10 @@ The `config.yml` file is a YAML file with the following structure:
 ```yaml
 credentials:
   username: Domain\username
-  password: Su#perS3cr3t!&
+  password: Su#per@S3cr3t!&
 
-http_proxy_url: "http://proxy.url:port"
-https_proxy_url: "https://proxy.url:port"
+http_proxy_url: "http://proxy.url:8080"
+https_proxy_url: "https://proxy.url:8080"
 
 files:
   - path: /etc/environment

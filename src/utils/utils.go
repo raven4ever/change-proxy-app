@@ -9,11 +9,6 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-// function to transform the credentials to a URL encoded string
-func CredentialsToURLString(config *config.Configuration) string {
-	return fmt.Sprintf("%s:%s", url.QueryEscape(config.Credentials.Username), url.QueryEscape(config.Credentials.Password))
-}
-
 // function to load the YAML config file from the given path
 func LoadConfig(configFilePath string) (*config.Configuration, error) {
 	buf, err := os.ReadFile(configFilePath)
@@ -28,4 +23,23 @@ func LoadConfig(configFilePath string) (*config.Configuration, error) {
 	}
 
 	return c, err
+}
+
+func InsertCredentialsIntoProxyURLs(config *config.Configuration) (string, string, error) {
+	// parse the proxy URLs
+	http_proxy_url, err := url.Parse(config.HttpProxy)
+	if err != nil {
+		return "", "", err
+	}
+
+	https_proxy_url, err := url.Parse(config.HttpsProxy)
+	if err != nil {
+		return "", "", err
+	}
+
+	// insert the credentials into the proxy URLs
+	http_proxy_url.User = url.UserPassword(config.Credentials.Username, config.Credentials.Password)
+	https_proxy_url.User = url.UserPassword(config.Credentials.Username, config.Credentials.Password)
+
+	return http_proxy_url.String(), https_proxy_url.String(), nil
 }
