@@ -8,10 +8,10 @@ import (
 )
 
 func main() {
-	// Define flags
+	// define flags
 	configFilePath := flag.String("config", "./config.yml", "path to config file")
 
-	// Parse flags
+	// parse flags
 	flag.Parse()
 
 	// verify if the config file path exists and is a file
@@ -21,18 +21,25 @@ func main() {
 		log.Fatal("Config file does not exist:", *configFilePath)
 	}
 
-	// Load config file from the config.yml path
+	// load config file from the config.yml path
 	config, err := utils.LoadConfig(*configFilePath)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// insert the credentials into the proxy URLs
-	http_proxy, https_proxy, err := utils.InsertCredentialsIntoProxyURLs(config)
+	http_proxy,  err := utils.InsertCredentialsIntoProxyURLs(config)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	log.Println("Using as HTTP proxy:", http_proxy)
-	log.Println("Using as HTTPS proxy:", https_proxy)
+	log.Println("Using as proxy URL:", http_proxy)
+
+	// edit each file in the config file and add the variables defined in the config file
+	for _, file := range config.Files {
+		_, err := files.EditFile(file)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
 }

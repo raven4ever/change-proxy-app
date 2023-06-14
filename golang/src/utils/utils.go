@@ -25,21 +25,15 @@ func LoadConfig(configFilePath string) (*config.Configuration, error) {
 	return c, err
 }
 
-func InsertCredentialsIntoProxyURLs(config *config.Configuration) (string, string, error) {
+func InsertCredentialsIntoProxyURLs(config *config.Configuration) (string, error) {
 	// parse the proxy URLs
-	http_proxy_url, err := url.Parse(config.HttpProxy)
+	https_proxy_url, err := url.Parse(config.ProxyURL)
 	if err != nil {
-		return "", "", err
-	}
-
-	https_proxy_url, err := url.Parse(config.HttpsProxy)
-	if err != nil {
-		return "", "", err
+		return "", err
 	}
 
 	// insert the credentials into the proxy URLs
-	http_proxy_url.User = url.UserPassword(config.Credentials.Username, config.Credentials.Password)
 	https_proxy_url.User = url.UserPassword(config.Credentials.Username, config.Credentials.Password)
 
-	return http_proxy_url.String(), https_proxy_url.String(), nil
+	return https_proxy_url.String(), nil
 }
