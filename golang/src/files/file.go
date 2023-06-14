@@ -40,6 +40,11 @@ func EditFile(file config.File, proxyUrl string) (bool, error) {
 			varExists := false
 
 			for i, line := range fileLines {
+				// check if line is empty
+				if len(line) == 0 {
+					continue
+				}
+				
 				if strings.HasPrefix(line, variable) {
 					varExists = true
 					fileLines[i] = fmt.Sprintf("%s=%s", variable, proxyUrl)

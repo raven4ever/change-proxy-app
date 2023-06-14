@@ -49,6 +49,10 @@ def edit_file(file: dict, proxy_url: str) -> None:
             # check if the variable exists
             var_exists = False
             for i, line in enumerate(file_lines):
+                # check if line is empty
+                if not line.strip():
+                    continue
+                
                 if line.startswith(var):
                     var_exists = True
                     file_lines[i] = f'{var}={proxy_url}\n'
