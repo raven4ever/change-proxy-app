@@ -1,37 +1,36 @@
-credentials:
-  username: Domain\username
-  password: Su#per@S3cr3t!&
+username: Domain\username
+password: Su#per@S3cr3t!&
 
 proxy_url: https://proxy.url:8080
 
 files:
-  - path: C:\Users\Adrian\Documents\Projects\go-change-proxy\testfile.txt
+  - path: C:\Users\Adrian\Documents\Projects\change-proxy-app\testfile.txt
     variables:
       - http_proxy
       - https_proxy
       - proxy
       - qualys_http_proxy
-  - path: /etc/environment
-    variables:
-      - http_proxy
-      - https_proxy
-      - proxy
-      - qualys_http_proxy
-  - path: /etc/wgetrc
-    variables:
-      - http_proxy
-      - https_proxy
-  - path: /home/username/.bashrc
-    variables:
-      - http_proxy
-      - https_proxy
-      - proxy
-      - qualys_http_proxy
-      - all_proxy
-  - path: /home/username/.zshrc
-    variables:
-      - http_proxy
-      - https_proxy
-      - proxy
-      - qualys_http_proxy
-      - all_proxy
+  # - path: /etc/environment
+  #   variables:
+  #     - http_proxy
+  #     - https_proxy
+  #     - proxy
+  #     - qualys_http_proxy
+  # - path: /etc/wgetrc
+  #   variables:
+  #     - http_proxy
+  #     - https_proxy
+  # - path: /home/username/.bashrc
+  #   variables:
+  #     - http_proxy
+  #     - https_proxy
+  #     - proxy
+  #     - qualys_http_proxy
+  #     - all_proxy
+  # - path: /home/username/.zshrc
+  #   variables:
+  #     - http_proxy
+  #     - https_proxy
+  #     - proxy
+  #     - qualys_http_proxy
+  #     - all_proxy
