@@ -1,4 +1,2 @@
-http_proxy=https://Domain%5Cusername:Su%23per%40S3cr3t%21%26@proxy.url:8080
-https_proxy=https://Domain%5Cusername:Su%23per%40S3cr3t%21%26@proxy.url:8080
-proxy=https://Domain%5Cusername:Su%23per%40S3cr3t%21%26@proxy.url:8080
-qualys_http_proxy=https://Domain%5Cusername:Su%23per%40S3cr3t%21%26@proxy.url:8080
+http_proxy=abc
+https_proxy=def

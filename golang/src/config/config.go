@@ -1,10 +1,5 @@
 package config
 
-type Credentials struct {
-	Username string `yaml:"username"`
-	Password string `yaml:"password"`
-}
-
 type File struct {
 	Path      string   `yaml:"path"`
 	Variables []string `yaml:"variables"`
@@ -12,7 +7,8 @@ type File struct {
 
 type Configuration struct {
 	// the credentials
-	Credentials Credentials `yaml:"credentials"`
+	Username string `yaml:"username"`
+	Password string `yaml:"password"`
 
 	// the proxy URLs
 	ProxyURL string `yaml:"proxy_url"`

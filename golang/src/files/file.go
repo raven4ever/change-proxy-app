@@ -1,10 +1,12 @@
 package files
 
 import (
+	"bufio"
 	"feynman/config"
+	"fmt"
 	"log"
 	"os"
-	"regexp"
+	"strings"
 )
 
 // function to verify if the given path exists and is a file
@@ -16,34 +18,51 @@ func FileExists(filename string) bool {
 	return !info.IsDir()
 }
 
-// function to edit a given files
-// the function will search and replace the variables defined in the config file
-func EditFile(file config.File) (bool, error) {
+func EditFile(file config.File, proxyUrl string) (bool, error) {
 	// check if the file exists
 	if FileExists(file.Path) {
-		// open the file & use bufio to read the file line by line
-		f, err := os.ReadFile(file.Path)
+		// open the file
+		f, err := os.OpenFile(file.Path, os.O_RDWR, 0644)
 		if err != nil {
 			log.Fatal(err)
 		}
+		defer f.Close()
 
-		// convert the file to a string
-		initialFile := string(f)
-		log.Println(initialFile)
+		fileScanner := bufio.NewScanner(f)
+		fileScanner.Split(bufio.ScanLines)
+		var fileLines []string
 
-		// search for the variables in the file
-		// if the variable is found, replace it
-		// if the variable is not found, add it to the end of the file
-		// if the variable is found more than once, replace all occurrences
-		for _, variable := range file.Variables {
-			// log.Printf("Searching for variable: %s in file %s", variable, file.Path)
-
-			// using regexp, find the line that starts with the variable name and select the line starting from = to the end of the line
-			m := regexp.MustCompile(`(?m)^` + variable + `=(.*)$`)
-			// matches := m.SubexpNames()
-			log.Println(m.ReplaceAllString(initialFile, variable + "=test"))
+		for fileScanner.Scan() {
+			fileLines = append(fileLines, fileScanner.Text())
 		}
 
+		for _, variable := range file.Variables {
+			varExists := false
+
+			for i, line := range fileLines {
+				if strings.HasPrefix(line, variable) {
+					varExists = true
+					fileLines[i] = fmt.Sprintf("%s=%s", variable, proxyUrl)
+					break
+				}
+			}
+
+			if !varExists {
+				fileLines = append(fileLines, fmt.Sprintf("%s=%s", variable, proxyUrl))
+			}
+		}
+
+		f.Truncate(0)
+		f.Seek(0, 0)
+
+		// write the lines to the file
+		datawriter := bufio.NewWriter(f)
+
+		for _, line := range fileLines {
+			_, _ = datawriter.WriteString(line + "\n")
+		}
+
+		datawriter.Flush()
 	} else {
 		log.Println("File does not exist:", file.Path)
 		return false, nil

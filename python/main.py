@@ -43,23 +43,23 @@ def edit_file(file: dict, proxy_url: str) -> None:
     # using regex, find the lines that start with the variable name and replace the value with the proxy_url value
     # if the variable is not found, add the variable to the end of the file
     with open(file_path, 'r+') as f:
-        lines = f.readlines()
+        file_lines = f.readlines()
 
         for var in file_vars:
             # check if the variable exists
             var_exists = False
-            for i, line in enumerate(lines):
+            for i, line in enumerate(file_lines):
                 if line.startswith(var):
                     var_exists = True
-                    lines[i] = f'{var}={proxy_url}\n'
+                    file_lines[i] = f'{var}={proxy_url}\n'
                     break
 
             # if the variable does not exist, add it to the end of the file
             if not var_exists:
-                lines.append(f'{var}={proxy_url}\n')
+                file_lines.append(f'{var}={proxy_url}\n')
 
         f.seek(0)
-        f.writelines(lines)
+        f.writelines(file_lines)
 
 
 if __name__ == '__main__':

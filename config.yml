@@ -10,27 +10,27 @@ files:
       - https_proxy
       - proxy
       - qualys_http_proxy
-  # - path: /etc/environment
-  #   variables:
-  #     - http_proxy
-  #     - https_proxy
-  #     - proxy
-  #     - qualys_http_proxy
-  # - path: /etc/wgetrc
-  #   variables:
-  #     - http_proxy
-  #     - https_proxy
-  # - path: /home/username/.bashrc
-  #   variables:
-  #     - http_proxy
-  #     - https_proxy
-  #     - proxy
-  #     - qualys_http_proxy
-  #     - all_proxy
-  # - path: /home/username/.zshrc
-  #   variables:
-  #     - http_proxy
-  #     - https_proxy
-  #     - proxy
-  #     - qualys_http_proxy
-  #     - all_proxy
+  - path: /etc/environment
+    variables:
+      - http_proxy
+      - https_proxy
+      - proxy
+      - qualys_http_proxy
+  - path: /etc/wgetrc
+    variables:
+      - http_proxy
+      - https_proxy
+  - path: /home/username/.bashrc
+    variables:
+      - http_proxy
+      - https_proxy
+      - proxy
+      - qualys_http_proxy
+      - all_proxy
+  - path: /home/username/.zshrc
+    variables:
+      - http_proxy
+      - https_proxy
+      - proxy
+      - qualys_http_proxy
+      - all_proxy

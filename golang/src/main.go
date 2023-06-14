@@ -28,16 +28,13 @@ func main() {
 	}
 
 	// insert the credentials into the proxy URLs
-	http_proxy,  err := utils.InsertCredentialsIntoProxyURLs(config)
-	if err != nil {
-		log.Fatal(err)
-	}
+	httpProxyURL := utils.InsertCredentialsIntoProxyURLs(config)
 
-	log.Println("Using as proxy URL:", http_proxy)
+	log.Println("Using as proxy URL:", httpProxyURL)
 
 	// edit each file in the config file and add the variables defined in the config file
 	for _, file := range config.Files {
-		_, err := files.EditFile(file)
+		_, err := files.EditFile(file, httpProxyURL)
 		if err != nil {
 			log.Fatal(err)
 		}

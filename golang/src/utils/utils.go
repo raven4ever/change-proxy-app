@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/url"
 	"os"
+	"strings"
 
 	"gopkg.in/yaml.v3"
 )
@@ -25,15 +26,22 @@ func LoadConfig(configFilePath string) (*config.Configuration, error) {
 	return c, err
 }
 
-func InsertCredentialsIntoProxyURLs(config *config.Configuration) (string, error) {
-	// parse the proxy URLs
-	https_proxy_url, err := url.Parse(config.ProxyURL)
-	if err != nil {
-		return "", err
+func InsertCredentialsIntoProxyURLs(config *config.Configuration) string {
+	proxyUrl := config.ProxyURL
+
+	// escape the username and password
+	username := url.QueryEscape(config.Username)
+	password := url.QueryEscape(config.Password)
+
+	// create the auth string
+	auth_string := username + ":" + password + "@"
+
+	// insert credentials into proxy url
+	if strings.HasPrefix(proxyUrl, "http://") || strings.HasPrefix(proxyUrl, "https://") {
+		proxyUrl = strings.Replace(proxyUrl, "://", "://"+auth_string, 1)
+	} else {
+		proxyUrl = "https://" + auth_string + proxyUrl
 	}
 
-	// insert the credentials into the proxy URLs
-	https_proxy_url.User = url.UserPassword(config.Credentials.Username, config.Credentials.Password)
-
-	return https_proxy_url.String(), nil
+	return proxyUrl
 }
