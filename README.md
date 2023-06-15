@@ -74,3 +74,11 @@ To install and use Feynman across your system you need to:
   ```bash
   feynman -config /path/to/config.yml
   ```
+
+## Note
+
+The tool is written in both Go and Python.
+
+Both versions are functionally identical and they will be released together.
+
+On the [releases](https://github.com/raven4ever/change-proxy-app/releases) page you will find the binaries for both versions under the form `feynman-go-vX.Y.Z-os-arch` and `feynman-py-vX.Y.Z-os-arch`.
