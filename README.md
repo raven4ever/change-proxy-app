@@ -14,8 +14,7 @@ The `config.yml` file is a YAML file with the following structure:
 username: Domain\username
 password: Su#per@S3cr3t!&
 
-http_proxy_url: "http://proxy.url:8080"
-https_proxy_url: "https://proxy.url:8080"
+proxy_url: https://proxy.url:8080
 
 files:
   - path: C:\Users\Adrian\Documents\Projects\change-proxy-app\testfile.txt
@@ -47,6 +46,10 @@ files:
       - qualys_http_proxy
       - all_proxy
 ```
+
+All the files listed in the `config.yml` file will be searched for the variables listed under the `variables` key. If a variable is found, it will be replaced with the value of the `proxy_url` key. If the variable is not found, it will be added to end of the file with the value of the `proxy_url` key.
+
+The `proxy_url` value that will be used to replace the variables will contain the username and password from the `username` and `password` keys in a URL encoded format (`https://username:password@url.com:8080`). The special characters in the `username` and `password` keys will be translated to their [URL encoded format](https://www.w3schools.com/tags/ref_urlencode.ASP).
 
 ## Installation
 
