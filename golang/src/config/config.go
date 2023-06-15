@@ -3,6 +3,7 @@ package config
 type File struct {
 	Path      string   `yaml:"path"`
 	Variables []string `yaml:"variables"`
+	Export    bool     `yaml:"export"`
 }
 
 type Configuration struct {

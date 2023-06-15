@@ -44,16 +44,26 @@ func EditFile(file config.File, proxyUrl string) (bool, error) {
 				if len(line) == 0 {
 					continue
 				}
-				
+
 				if strings.HasPrefix(line, variable) {
 					varExists = true
-					fileLines[i] = fmt.Sprintf("%s=%s", variable, proxyUrl)
+
+					if file.Export {
+						fileLines[i] = fmt.Sprintf("export %s=%s", variable, proxyUrl)
+					} else {
+						fileLines[i] = fmt.Sprintf("%s=%s", variable, proxyUrl)
+					}
+
 					break
 				}
 			}
 
 			if !varExists {
-				fileLines = append(fileLines, fmt.Sprintf("%s=%s", variable, proxyUrl))
+				if file.Export {
+					fileLines = append(fileLines, fmt.Sprintf("export %s=%s", variable, proxyUrl))
+				} else {
+					fileLines = append(fileLines, fmt.Sprintf("%s=%s", variable, proxyUrl))
+				}
 			}
 		}
 

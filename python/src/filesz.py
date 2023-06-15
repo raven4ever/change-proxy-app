@@ -32,12 +32,19 @@ def edit_file(file: dict, proxy_url: str) -> None:
 
                 if line.startswith(var):
                     var_exists = True
-                    file_lines[i] = f'{var}={proxy_url}\n'
+
+                    if file['export']:
+                        file_lines[i] = f'export {var}={proxy_url}\n'
+                    else:
+                        file_lines[i] = f'{var}={proxy_url}\n'
                     break
 
             # if the variable does not exist, add it to the end of the file
             if not var_exists:
-                file_lines.append(f'{var}={proxy_url}\n')
+                if file['export']:
+                    file_lines.append(f'export {var}={proxy_url}\n')
+                else:
+                    file_lines.append(f'{var}={proxy_url}\n')
 
         f.seek(0)
         f.writelines(file_lines)

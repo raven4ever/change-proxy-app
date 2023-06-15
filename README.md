@@ -21,7 +21,10 @@ files:
     variables:
       - http_proxy
       - https_proxy
+      - proxy
+      - qualys_http_proxy
   - path: /etc/environment
+    export: false
     variables:
       - http_proxy
       - https_proxy
@@ -32,6 +35,7 @@ files:
       - http_proxy
       - https_proxy
   - path: /home/username/.bashrc
+    export: true
     variables:
       - http_proxy
       - https_proxy
@@ -39,6 +43,7 @@ files:
       - qualys_http_proxy
       - all_proxy
   - path: /home/username/.zshrc
+    export: true
     variables:
       - http_proxy
       - https_proxy
@@ -50,6 +55,8 @@ files:
 All the files listed in the `config.yml` file will be searched for the variables listed under the `variables` key. If a variable is found, it will be replaced with the value of the `proxy_url` key. If the variable is not found, it will be added to end of the file with the value of the `proxy_url` key.
 
 The `proxy_url` value that will be used to replace the variables will contain the username and password from the `username` and `password` keys in a URL encoded format (`https://username:password@url.com:8080`). The special characters in the `username` and `password` keys will be translated to their [URL encoded format](https://www.w3schools.com/tags/ref_urlencode.ASP).
+
+For each file listed in `config.yml` you can specify if the variables should be exported or not. This is done by setting the `export` key to `true` or `false`. If the `export` key is not present, the default value is `false`.
 
 ## Installation
 

@@ -11,6 +11,7 @@ files:
       - proxy
       - qualys_http_proxy
   - path: /etc/environment
+    export: false
     variables:
       - http_proxy
       - https_proxy
@@ -21,6 +22,7 @@ files:
       - http_proxy
       - https_proxy
   - path: /home/username/.bashrc
+    export: true
     variables:
       - http_proxy
       - https_proxy
@@ -28,6 +30,7 @@ files:
       - qualys_http_proxy
       - all_proxy
   - path: /home/username/.zshrc
+    export: true
     variables:
       - http_proxy
       - https_proxy
