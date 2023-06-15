@@ -59,4 +59,4 @@ jobs:
           fail_on_unmatched_files: true
           token: ${{ secrets.RELEASE_TOKEN }}
           body: ${{ github.ref_name }}
-          files: ${{ github.workspace }}/binaries/feynman*
+          files: ${{ github.workspace }}/binaries/*
