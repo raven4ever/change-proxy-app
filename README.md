@@ -1,5 +1,7 @@
 # Feynman
 
+[![Publish Binaries](https://github.com/raven4ever/change-proxy-app/actions/workflows/release.yml/badge.svg)](https://github.com/raven4ever/change-proxy-app/actions/workflows/release.yml)
+
 Feynman is a tool to change the proxy URL on a Linux system.
 
 The tool will read the files to be changed from the `config.yml` file.
