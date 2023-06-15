@@ -58,9 +58,9 @@ To install and use Feynman across your system you need to:
 
 ## Usage
 
-**_Before running the binary, make sure you have sufficient permissions to change the files listed in the `config.yml` file._**
+**_!!!Before running the binary, make sure you have sufficient permissions to change the files listed in the `config.yml` file!!!_**
 
-- If you want to use the default `config.yml` file, just run the binary without any arguments:
+- If your `config.yml` file is located in the same location as the binary, just run the binary without any arguments:
 
   ```bash
   feynman
