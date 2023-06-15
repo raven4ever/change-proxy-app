@@ -23,7 +23,9 @@ jobs:
           check-latest: true
 
       - name: Build Binary name
-        run: BINARY_NAME=feynman-${{ matrix.GOOS }}-${{ matrix.GOARCH }}
+        run: |
+          BINARY_NAME=feynman-go-${{ matrix.GOOS }}-${{ matrix.GOARCH }}
+          echo "BINARY_NAME=$BINARY_NAME" >> $GITHUB_ENV
 
       - name: Build Feynman
         run: |
