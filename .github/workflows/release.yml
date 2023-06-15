@@ -58,4 +58,4 @@ jobs:
           token: ${{ secrets.RELEASE_TOKEN }}
           body: ${{ github.ref_name }}
           files: |
-            ./binaries/feynman*
+            ${{ github.workspace }}/binaries/feynman*
