@@ -51,7 +51,12 @@ jobs:
       - name: Download packages
         uses: actions/download-artifact@v3
         with:
-          path: ./binaries
+          path: ${{ github.workspace }}/binaries
+
+      - name: test
+        run: |
+          ls -larth ${{ github.workspace }}/binaries
+          tree ${{ github.workspace }}/binaries
 
       - name: Release
         uses: softprops/action-gh-release@v1
