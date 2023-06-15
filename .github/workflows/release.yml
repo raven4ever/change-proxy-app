@@ -24,7 +24,7 @@ jobs:
 
       - name: Build Binary name
         run: |
-          BINARY_NAME=feynman-go-${{  github.ref_name }}"-${{ matrix.GOOS }}-${{ matrix.GOARCH }}
+          BINARY_NAME=feynman-go-${{ github.ref_name }}-${{ matrix.GOOS }}-${{ matrix.GOARCH }}
           echo "BINARY_NAME=$BINARY_NAME" >> $GITHUB_ENV
 
       - name: Build Feynman
@@ -39,8 +39,8 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: feynman-go-${{  github.ref_name }}"-${{ matrix.GOOS }}-${{ matrix.GOARCH }}
-          path: ${{ github.workspace }}/golang/src/feynman-go-${{  github.ref_name }}"-${{ matrix.GOOS }}-${{ matrix.GOARCH }}
+          name: feynman-go-${{ github.ref_name }}-${{ matrix.GOOS }}-${{ matrix.GOARCH }}
+          path: ${{ github.workspace }}/golang/src/feynman-go-${{ github.ref_name }}-${{ matrix.GOOS }}-${{ matrix.GOARCH }}
 
   release:
     runs-on: ubuntu-latest
@@ -56,5 +56,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           token: ${{ secrets.RELEASE_TOKEN }}
+          body: ${{ github.ref_name }}
           files: |
             ./binaries/feynman*
