@@ -6,7 +6,7 @@ on:
       - "master"
 
 jobs:
-  build-release-go:
+  build-go:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -35,3 +35,15 @@ jobs:
           cd ./golang/src
           go build -o $BINARY_NAME
           ls -larth
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: $BINARY_NAME
+          path: ${{ github.workspace }}/golang/src/$BINARY_NAME
+
+  # release:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Release
+  #       uses: softprops/action-gh-release@v1
