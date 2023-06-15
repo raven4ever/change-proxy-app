@@ -53,15 +53,10 @@ jobs:
         with:
           path: ${{ github.workspace }}/binaries
 
-      - name: test
-        run: |
-          ls -larth ${{ github.workspace }}/binaries
-          tree ${{ github.workspace }}/binaries
-
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           fail_on_unmatched_files: true
           token: ${{ secrets.RELEASE_TOKEN }}
           body: ${{ github.ref_name }}
-          files: ${{ github.workspace }}/binaries/*
+          files: ${{ github.workspace }}/binaries/**/feynman*
