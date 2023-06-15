@@ -2,8 +2,8 @@ name: Build & Publish Binaries
 
 on:
   push:
-    branches:
-      - "master"
+    tags:
+      - "v*.*.*"
 
 jobs:
   build-go:
@@ -42,8 +42,16 @@ jobs:
           name: feynman-go-v0.1.0-${{ matrix.GOOS }}-${{ matrix.GOARCH }}
           path: ${{ github.workspace }}/golang/src/feynman-go-v0.1.0-${{ matrix.GOOS }}-${{ matrix.GOARCH }}
 
-  # release:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Release
-  #       uses: softprops/action-gh-release@v1
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download packages
+        uses: actions/download-artifact@v3
+        with:
+          path: ./binaries
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ./binaries/feynman*
