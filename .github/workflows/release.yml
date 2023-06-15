@@ -39,8 +39,8 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: $BINARY_NAME
-          path: ${{ github.workspace }}/golang/src/$BINARY_NAME
+          name: "$BINARY_NAME"
+          path: "${{ github.workspace }}/golang/src/$BINARY_NAME"
 
   # release:
   #   runs-on: ubuntu-latest
