@@ -23,7 +23,7 @@ jobs:
           check-latest: true
 
       - name: Build Binary name
-        run: BINARY_NAME=feynman-$GOOS-$GOARCH
+        run: BINARY_NAME=feynman-${{ matrix.GOOS }}-${{ matrix.GOARCH }}
 
       - name: Build Feynman
         run: |
