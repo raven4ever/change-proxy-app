@@ -1,0 +1,21 @@
+name: Build & Publish Binaries
+
+on:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  build-release-go:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout
+
+      - name: Setup Go
+        uses: actions/setup-go
+        with:
+          go-version: "^1.20"
+
+      - name: Test version
+        run: go version
