@@ -8,6 +8,10 @@ on:
 jobs:
   build-release-go:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        GOOS: [linux, darwin, windows]
+        GOARCH: [amd64]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -18,5 +22,10 @@ jobs:
           go-version-file: "./golang/src/go.mod"
           check-latest: true
 
-      - name: Test version
-        run: go version
+      - name: Build Binary name
+        run: BINARY_NAME=feynman-$GOOS-$GOARCH
+
+      - name: Build Feynman
+        run: |
+          go version
+          echo $BINARY_NAME
