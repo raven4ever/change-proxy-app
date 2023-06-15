@@ -24,10 +24,14 @@ jobs:
 
       - name: Build Binary name
         run: |
-          BINARY_NAME=feynman-go-${{ matrix.GOOS }}-${{ matrix.GOARCH }}
+          BINARY_NAME=feynman-go-v0.1.0-${{ matrix.GOOS }}-${{ matrix.GOARCH }}
           echo "BINARY_NAME=$BINARY_NAME" >> $GITHUB_ENV
 
       - name: Build Feynman
+        with:
+          GOOS: ${{ matrix.GOOS }}
+          GOARCH: ${{ matrix.GOARCH }}
         run: |
-          go version
-          echo $BINARY_NAME
+          cd ./golang/src
+          go build -o $BINARY_NAME
+          ls -larth
