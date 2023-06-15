@@ -1,4 +1,4 @@
-name: Build & Publish Binaries
+name: Publish Binaries
 
 on:
   push:
@@ -22,18 +22,13 @@ jobs:
           go-version-file: "./golang/src/go.mod"
           check-latest: true
 
-      - name: Build Binary name
-        run: |
-          BINARY_NAME=feynman-go-${{ github.ref_name }}-${{ matrix.GOOS }}-${{ matrix.GOARCH }}
-          echo "BINARY_NAME=$BINARY_NAME" >> $GITHUB_ENV
-
       - name: Build Feynman
         env:
           GOOS: ${{ matrix.GOOS }}
           GOARCH: ${{ matrix.GOARCH }}
         run: |
           cd ./golang/src
-          go build -o $BINARY_NAME
+          go build -o feynman-go-${{ github.ref_name }}-${{ matrix.GOOS }}-${{ matrix.GOARCH }}
           ls -larth
 
       - name: Upload Artifact
