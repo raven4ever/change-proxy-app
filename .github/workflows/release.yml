@@ -39,8 +39,8 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ BINARY_NAME }}
-          path: ${{ github.workspace }}/golang/src/feynman-go*
+          name: feynman-go-v0.1.0-${{ matrix.GOOS }}-${{ matrix.GOARCH }}
+          path: ${{ github.workspace }}/golang/src/feynman-go-v0.1.0-${{ matrix.GOOS }}-${{ matrix.GOARCH }}
 
   # release:
   #   runs-on: ubuntu-latest
