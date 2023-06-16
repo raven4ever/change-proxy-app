@@ -29,15 +29,15 @@ jobs:
       - name: Build Feynman
         run: |
           cd ./python/src
-          pyinstaller --onefile --clean feynman-py-${{ github.ref_name }}-$RUNNER_OS
+          pyinstaller --onefile --clean feynman-py-${{ github.ref_name }}-${{ runner.os }}-${{ runner.arch }}
           ls -larth
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           retention-days: 1
-          name: feynman-py-${{ github.ref_name }}-$RUNNER_OS
-          path: ${{ github.workspace }}/python/src/dist/feynman-py-${{ github.ref_name }}-$RUNNER_OS
+          name: feynman-py-${{ github.ref_name }}-${{ runner.os }}-${{ runner.arch }}
+          path: ${{ github.workspace }}/python/src/dist/feynman-py-${{ github.ref_name }}-${{ runner.os }}-${{ runner.arch }}
 
   build-go:
     strategy:
