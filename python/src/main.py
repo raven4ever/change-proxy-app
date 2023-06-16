@@ -9,6 +9,8 @@ from filesz import edit_file, file_path
 from utils import insert_credentials_into_proxy_url
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
+
     parser = argparse.ArgumentParser(description='Search & Replace Proxy URL.')
 
     # add arguments
