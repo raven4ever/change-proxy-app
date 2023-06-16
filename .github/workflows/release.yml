@@ -6,12 +6,45 @@ on:
       - "v*.*.*"
 
 jobs:
+  build-py:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          check-latest: true
+
+      - name: Install dependencies
+        run: |
+          pip install -r ./python/src/requirements.txt
+          pip install pyinstaller
+
+      - name: Build Feynman
+        run: |
+          cd ./python/src
+          pyinstaller --onefile --clean feynman-py-${{ github.ref_name }}-{{ runner.os }}
+          ls -larth
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          retention-days: 1
+          name: feynman-py-${{ github.ref_name }}-{{ runner.os }}
+          path: ${{ github.workspace }}/python/src/dist/feynman-py-${{ github.ref_name }}-{{ runner.os }}
+
   build-go:
-    runs-on: ubuntu-latest
     strategy:
       matrix:
         GOOS: [linux, darwin, windows]
         GOARCH: [amd64]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
