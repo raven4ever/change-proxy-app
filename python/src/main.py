@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import logging
 
 import yaml
 
@@ -25,7 +26,7 @@ if __name__ == '__main__':
     # insert credentials into proxy url
     proxy_url = insert_credentials_into_proxy_url(config)
 
-    print(proxy_url)
+    logging.info(f"Using as proxy URL: {proxy_url}")
 
     # edit each file in the config file and add the variables defined in the config file
     for file in config['files']:
