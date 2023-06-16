@@ -30,7 +30,6 @@ jobs:
         run: |
           cd ./python/src
           pyinstaller --onefile --clean --name feynman-py-${{ github.ref_name }}-${{ runner.os }}-${{ runner.arch }} main.py
-          ls -larth
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
@@ -62,7 +61,6 @@ jobs:
         run: |
           cd ./golang/src
           go build -o feynman-go-${{ github.ref_name }}-${{ matrix.GOOS }}-${{ matrix.GOARCH }}
-          ls -larth
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
